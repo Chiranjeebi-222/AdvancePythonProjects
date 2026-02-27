@@ -1,0 +1,64 @@
+# Login credentials
+uid = "chiru"
+pswd = "1234"
+
+attempts = 0
+max_attempts = 3
+
+# Login system
+while attempts < max_attempts:
+    uid = input("Enter User ID: ")
+    pwd = input("Enter Password: ")
+
+    if uid == uid and pwd == pswd:
+        print("Login Successful!")
+        break
+    else:
+        attempts += 1
+        print("Invalid ID or Password. Attempts left:", max_attempts - attempts)
+
+if attempts == max_attempts:
+    print("Too many wrong attempts. Login blocked.")
+else:
+    balance = 0
+    transaction = []
+
+    while True:
+        print("\n1.Deposit")
+        print("2.Withdraw")
+        print("3.Chech balance")
+        print("4.Transaction History")
+        print("5.Exit")
+
+        choice = int(input("Enter your choice : "))
+
+        if choice == 1:
+            amt = int(input("Enter deposit amount:"))
+            balance += amt
+            transaction.append("Deposited: " + str(amt))
+            print("Amount Deposited")
+
+        elif choice == 2:
+            amt = int(input("Enter the withdrawl amount :"))
+            if amt <= balance:
+                balance -= amt
+                transaction.append("Withdraw: " + str(amt))
+            else:
+                print("Insufficient balance")
+
+        elif choice == 3:
+            print("Current Balance :", balance)
+
+        elif choice == 4:
+            print("\nTransaction History")
+            if len(transaction) == 0:
+                print("No Transaction History")
+            else:
+                for t in transaction:
+                    print(t)
+
+        elif choice == 5:
+            print("Thank you for using the system")
+            break
+        else:
+            print("Invalid choice")

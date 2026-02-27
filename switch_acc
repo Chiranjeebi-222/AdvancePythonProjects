@@ -1,0 +1,109 @@
+# ATM System with Account Switching
+
+# Accounts (balance starts at 0)
+accounts = {
+    "chiru": {"password": "1234", "balance": 0, "transactions": []},
+    "rahul": {"password": "1111", "balance": 0, "transactions": []},
+    "riya": {"password": "2222", "balance": 0, "transactions": []}
+}
+
+while True:
+    print("\n====== MAIN MENU ======")
+    print("1. Login")
+    print("2. Exit")
+
+    main_choice = input("Enter your choice: ")
+
+    if main_choice == "1":
+
+        # -------- LOGIN SYSTEM -------- #
+        max_attempts = 3
+        attempts = 0
+        logged_in = False
+
+        while attempts < max_attempts:
+            uid = input("Enter User ID: ")
+            pwd = input("Enter Password: ")
+
+            if uid in accounts and accounts[uid]["password"] == pwd:
+                print("Login Successful!")
+                user_data = accounts[uid]
+                logged_in = True
+                break
+            else:
+                attempts += 1
+                print("Invalid ID or Password.")
+                print("Attempts left:", max_attempts - attempts)
+
+        if not logged_in:
+            print("Too many wrong attempts. Returning to Main Menu.")
+            continue
+
+        # -------- ATM MENU -------- #
+        while True:
+            print("\n------ ATM MENU ------")
+            print("1. Deposit")
+            print("2. Withdraw")
+            print("3. Check Balance")
+            print("4. Transaction History")
+            print("5. Logout (Switch Account)")
+
+            try:
+                choice = int(input("Enter your choice: "))
+            except ValueError:
+                print("Please enter a valid number.")
+                continue
+
+            # Deposit
+            if choice == 1:
+                try:
+                    amt = int(input("Enter deposit amount: "))
+                    if amt > 0:
+                        user_data["balance"] += amt
+                        user_data["transactions"].append("Deposited: " + str(amt))
+                        print("Amount Deposited Successfully!")
+                    else:
+                        print("Enter a positive amount.")
+                except ValueError:
+                    print("Invalid amount.")
+
+            # Withdraw
+            elif choice == 2:
+                try:
+                    amt = int(input("Enter withdrawal amount: "))
+                    if amt > 0 and amt <= user_data["balance"]:
+                        user_data["balance"] -= amt
+                        user_data["transactions"].append("Withdrawn: " + str(amt))
+                        print("Amount Withdrawn Successfully!")
+                    else:
+                        print("Insufficient Balance or Invalid Amount.")
+                except ValueError:
+                    print("Invalid amount.")
+
+            # Check Balance
+            elif choice == 3:
+                print("Current Balance:", user_data["balance"])
+
+            # Transaction History
+            elif choice == 4:
+                print("\n--- Transaction History ---")
+                if len(user_data["transactions"]) == 0:
+                    print("No Transactions Yet.")
+                else:
+                    for t in user_data["transactions"]:
+                        print(t)
+
+            # Logout (Switch Account)
+            elif choice == 5:
+                print("Logging out...")
+                break
+
+            else:
+                print("Invalid Choice. Try again.")
+
+    elif main_choice == "2":
+        print("Thank you for using the ATM System.")
+        break
+
+    else:
+        print("Invalid choice. Try again.")

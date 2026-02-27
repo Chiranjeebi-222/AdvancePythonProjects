@@ -1,0 +1,51 @@
+#1- reverse of a string
+"""text = input("Enter a string: ")
+print("Reversed string:", text[::-1])"""
+
+#2- count uppercase and lowercase letters
+""""text = input("Enter a string: ")
+upper, lower = 0, 0
+
+for char in text:
+    if char.isupper():
+        upper += 1
+    elif char.islower():
+        lower += 1
+
+print(f"Uppercase: {upper}, Lowercase: {lower}")"""
+
+#3- Checking if string contains only digits
+"""text = input("Enter a string: ")
+if text.isdigit():
+    print("The string contains only digits.")
+else:
+    print("The string contains non-digit characters.")"""""
+
+#4- Replace space with underscore
+"""text = input("Enter a string: ")
+modified_text = text.replace(" ", "_")
+print("Modified string:", modified_text)"""
+
+#5-COunt frequency of each character 
+"""text = input("Enter a string: ")
+frequency = {}
+
+for char in text:
+    frequency[char] = frequency.get(char, 0) + 1
+
+print("Character frequencies:", frequency)"""
+
+#6- FInd first and last occurrence of a character
+"""text = input("Enter a string: ")
+char = input("Enter character to search: ")
+
+first = text.find(char)
+last = text.rfind(char)
+
+if first != -1:
+    print(f"First occurrence: index {first}")
+    print(f"Last occurrence: index {last}")
+else:
+    print("Character not found.")"""
+
+#
