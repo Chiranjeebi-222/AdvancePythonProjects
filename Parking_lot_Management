@@ -1,0 +1,44 @@
+class ParkingLot:
+    def __init__(self, capacity):
+        self.capacity = capacity
+        self.vehicles = []
+
+    def park_vehicle(self, vehicle):
+        if len(self.vehicles) < self.capacity:
+            self.vehicles.append(vehicle)
+            print("Vehicle parked")
+        else:
+            print("Parking Full")
+
+    def remove_vehicle(self, vehicle):
+        if vehicle in self.vehicles:
+            self.vehicles.remove(vehicle)
+            print("Vehicle exited")
+        else:
+            print("Vehicle not found")
+
+    def show(self):
+        print("Parked vehicles:", self.vehicles)
+        print("Available spots:", self.capacity - len(self.vehicles))
+
+
+capacity = int(input("Enter parking capacity: "))
+p = ParkingLot(capacity)
+
+while True:
+    print("\n1 Park Vehicle\n2 Remove Vehicle\n3 Show Status\n4 Exit")
+    ch = input("Enter choice: ")
+
+    if ch == "1":
+        v = input("Enter vehicle number: ")
+        p.park_vehicle(v)
+
+    elif ch == "2":
+        v = input("Enter vehicle number: ")
+        p.remove_vehicle(v)
+
+    elif ch == "3":
+        p.show()
+
+    elif ch == "4":
+        break

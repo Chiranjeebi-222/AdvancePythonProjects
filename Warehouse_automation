@@ -1,0 +1,27 @@
+class Warehouse:
+    def __init__(self):
+        self.stock = {}
+
+    def add_item(self):
+        item = input("Item name: ")
+        qty = int(input("Quantity: "))
+        self.stock[item] = self.stock.get(item,0) + qty
+
+    def show(self):
+        print(self.stock)
+
+
+w = Warehouse()
+
+while True:
+    print("\n1 Add Item\n2 Show Inventory\n3 Exit")
+    ch = input("Choice: ")
+
+    if ch == "1":
+        w.add_item()
+
+    elif ch == "2":
+        w.show()
+
+    elif ch == "3":
+        break

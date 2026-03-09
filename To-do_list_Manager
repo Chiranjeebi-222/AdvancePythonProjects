@@ -1,0 +1,33 @@
+class Task:
+    def __init__(self, name, priority):
+        self.name = name
+        self.priority = priority
+
+class Todo:
+    def __init__(self):
+        self.tasks = []
+
+    def add_task(self):
+        name = input("Enter task: ")
+        priority = input("Enter priority: ")
+        self.tasks.append(Task(name, priority))
+
+    def show_tasks(self):
+        for t in self.tasks:
+            print(t.name, "-", t.priority)
+
+
+todo = Todo()
+
+while True:
+    print("\n1 Add Task\n2 Show Tasks\n3 Exit")
+    ch = input("Choice: ")
+
+    if ch == "1":
+        todo.add_task()
+
+    elif ch == "2":
+        todo.show_tasks()
+
+    elif ch == "3":
+        break
