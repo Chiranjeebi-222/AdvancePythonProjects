@@ -1,0 +1,44 @@
+class ContactBook:
+    def __init__(self):
+        self.contacts = {}
+
+    def add_contact(self):
+        try:
+            name = input("Enter name: ")
+            phone = input("Enter phone number: ")
+
+            if not name or not phone:
+                raise ValueError("Fields cannot be empty")
+
+            if name in self.contacts:
+                raise Exception("Duplicate contact")
+
+            if not phone.isdigit() or len(phone) != 10:
+                raise ValueError("Invalid phone number")
+
+            self.contacts[name] = phone
+            print("Contact saved")
+
+        except Exception as e:
+            print("Error:", e)
+
+    def search_contact(self):
+        name = input("Enter name to search: ")
+        try:
+            print("Phone:", self.contacts[name])
+        except KeyError:
+            print("Contact not found")
+
+
+book = ContactBook()
+
+while True:
+    print("\n1 Add Contact\n2 Search Contact\n3 Exit")
+    choice = input("Enter choice: ")
+
+    if choice == "1":
+        book.add_contact()
+    elif choice == "2":
+        book.search_contact()
+    else:
+        break

@@ -1,0 +1,30 @@
+class OutOfStockError(Exception):
+    pass
+
+class InvalidProductIDError(Exception):
+    pass
+
+
+class Inventory:
+    def __init__(self):
+        self.products = {"P101": 5}
+
+    def buy(self):
+        try:
+            product_id = input("Enter product ID: ")
+
+            if product_id not in self.products:
+                raise InvalidProductIDError("Invalid product ID")
+
+            if self.products[product_id] == 0:
+                raise OutOfStockError("Product out of stock")
+
+            self.products[product_id] -= 1
+            print("Product purchased")
+
+        except Exception as e:
+            print("Error:", e)
+
+
+inv = Inventory()
+inv.buy()

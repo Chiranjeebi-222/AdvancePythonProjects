@@ -1,0 +1,30 @@
+class Bank:
+    def __init__(self):
+        self.accounts = {"A101": 5000, "A102": 3000}
+
+    def transfer(self):
+        try:
+            sender = input("Sender Account: ")
+            receiver = input("Receiver Account: ")
+            amount = int(input("Amount: "))
+
+            if sender not in self.accounts or receiver not in self.accounts:
+                raise Exception("Invalid account number")
+
+            if self.accounts[sender] < amount:
+                raise Exception("Overdraft! Insufficient balance")
+
+            self.accounts[sender] -= amount
+            self.accounts[receiver] += amount
+
+            print("Transaction successful")
+
+        except ValueError:
+            print("Amount must be numeric")
+
+        except Exception as e:
+            print("Transaction failed:", e)
+
+
+bank = Bank()
+bank.transfer()

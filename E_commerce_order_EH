@@ -1,0 +1,104 @@
+class InvalidCouponError(Exception):
+    pass
+
+class OutOfStockError(Exception):
+    pass
+
+class InvalidPaymentMethodError(Exception):
+    pass
+
+
+class EcommerceSystem:
+
+    def __init__(self):
+        self.products = {
+            "Laptop": 5,
+            "Phone": 3,
+            "Headphones": 4
+        }
+
+        self.valid_coupons = ["SAVE10", "DISC20"]
+        self.orders = []
+
+    def show_products(self):
+        print("\nAvailable Products:")
+        for product, qty in self.products.items():
+            print(product, "- Stock:", qty)
+
+    def place_order(self):
+        try:
+            product = input("Enter product name: ")
+            coupon = input("Enter coupon code (press Enter if none): ")
+            payment = input("Payment method (card/upi/cash): ")
+
+            if product not in self.products:
+                raise Exception("Product does not exist")
+
+            if self.products[product] <= 0:
+                raise OutOfStockError("Product is out of stock")
+
+            if coupon and coupon not in self.valid_coupons:
+                raise InvalidCouponError("Invalid coupon code")
+
+            if payment not in ["card", "upi", "cash"]:
+                raise InvalidPaymentMethodError("Invalid payment method")
+
+            self.products[product] -= 1
+            self.orders.append(product)
+
+            print("Order placed successfully for", product)
+
+        except OutOfStockError as e:
+            print("Error:", e)
+
+        except InvalidCouponError as e:
+            print("Error:", e)
+
+        except InvalidPaymentMethodError as e:
+            print("Error:", e)
+
+        except Exception as e:
+            print("Error:", e)
+
+    def return_order(self):
+        try:
+            product = input("Enter product to return: ")
+
+            if product not in self.orders:
+                raise Exception("Order not found")
+
+            self.orders.remove(product)
+            self.products[product] += 1
+
+            print("Refund processed and product returned")
+
+        except Exception as e:
+            print("Error:", e)
+
+
+system = EcommerceSystem()
+
+while True:
+    print("\n--- E-Commerce Order System ---")
+    print("1. View Products")
+    print("2. Place Order")
+    print("3. Return Order")
+    print("4. Exit")
+
+    choice = input("Enter choice: ")
+
+    if choice == "1":
+        system.show_products()
+
+    elif choice == "2":
+        system.place_order()
+
+    elif choice == "3":
+        system.return_order()
+
+    elif choice == "4":
+        print("Exiting system...")
+        break
+
+    else:
+        print("Invalid choice")
